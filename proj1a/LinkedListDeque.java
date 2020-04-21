@@ -65,6 +65,9 @@ public class LinkedListDeque<T> {
 	}
 
 	public T removeFirst() {
+		if (size == 0) {
+			return null;
+		}
 		DLNode p = head.next;
 		head.next.next.last = head;
 		head.next = head.next.next;
@@ -73,9 +76,13 @@ public class LinkedListDeque<T> {
 	}
 
 	public T removeLast() {
+		if (size == 0) {
+			return null;
+		}
 		DLNode p = head.last;
 		head.last.last.next = head;
 		head.last = head.last.last;
+		size -= 1;
 		return p.value;
 	}
 
@@ -87,7 +94,7 @@ public class LinkedListDeque<T> {
 		return p.value;
 	}
 
-	public T getRecursiveFromNode(DLNode p, int index) {
+	private T getRecursiveFromNode(DLNode p, int index) {
 		if (index == 0) {
 			return p.value;
 		}
