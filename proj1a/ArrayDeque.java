@@ -5,13 +5,13 @@ public class ArrayDeque<T> {
     private int size;
 
     public ArrayDeque() {
-        items = new T[256];
+        items = (T[]) new Object[256];
         firstIndex = 128;
         size = 0;
     }
 
     private void resize(int begin, int capacity) {
-        T[] a = new T[capacity];
+        T[] a = (T[]) new Object[capacity];
         System.arraycopy(items, firstIndex, a, begin, size);
         items = a;
     }
@@ -19,7 +19,7 @@ public class ArrayDeque<T> {
     public void addFirst(T item) {
         if (firstIndex == 0) {
             int len = items.length;
-            items.resize(len + firstIndex, 2 * len);
+            resize(len + firstIndex, 2 * len);
             firstIndex = items.length;
         }
         items[firstIndex - 1] = item;
@@ -29,7 +29,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T item) {
         if (firstIndex + size == items.length) {
-            items.resize(firstIndex, 2 * items.length);
+            resize(firstIndex, 2 * items.length);
         }
         items[firstIndex + size] = item;
         size += 1;
@@ -75,7 +75,7 @@ public class ArrayDeque<T> {
 
     public T get(int index) {
         if (index >= size || index < 0) {
-            return null
+            return null;
         }
         return items[firstIndex + index];
     }
