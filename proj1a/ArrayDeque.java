@@ -18,15 +18,13 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (firstIndex == 0) {
-            resize(items.length + firstIndex, items.length * 2);
+            resize(items.length, items.length * 2);
             firstIndex = items.length / 2;
         }
-        if (size == 0) {
-            items[firstIndex] = item;
-        } else {
-            items[firstIndex - 1] = item;
+        if (size != 0) {
             firstIndex -= 1;
         }
+        items[firstIndex] = item;
         size += 1;
     }
 
@@ -65,6 +63,7 @@ public class ArrayDeque<T> {
         size -= 1;
         if (size < items.length / 4 && items.length > 8) {
             resize(items.length / 8, items.length / 2);
+            firstIndex = items.length / 4
         }
         if (size == 0) {
             firstIndex = items.length / 2;
@@ -81,6 +80,7 @@ public class ArrayDeque<T> {
         size -= 1;
         if (size < items.length / 4 && items.length > 8) {
             resize(items.length / 8, items.length / 2);
+            firstIndex = items.length / 4
         }
         if (size == 0) {
             firstIndex = items.length / 2;
