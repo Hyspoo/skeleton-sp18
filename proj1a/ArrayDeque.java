@@ -5,8 +5,8 @@ public class ArrayDeque<T> {
     private int size;
 
     public ArrayDeque() {
-        items = (T[]) new Object[256];
-        firstIndex = 128;
+        items = (T[]) new Object[8];
+        firstIndex = 4;
         size = 0;
     }
 
@@ -18,18 +18,21 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (firstIndex == 0) {
-            int len = items.length;
-            resize(len + firstIndex, 2 * len);
-            firstIndex = items.length;
+            resize(items.length + firstIndex, items.length * 2);
+            firstIndex = items.length / 2;
         }
-        items[firstIndex - 1] = item;
-        firstIndex -= 1;
+        if (size == 0) {
+            items[firstIndex] = item;
+        } else {
+            items[firstIndex - 1] = item;
+            firstIndex -= 1;
+        }
         size += 1;
     }
 
     public void addLast(T item) {
         if (firstIndex + size == items.length) {
-            resize(firstIndex, 2 * items.length);
+            resize(firstIndex, items.length * 2);
         }
         items[firstIndex + size] = item;
         size += 1;
@@ -60,6 +63,12 @@ public class ArrayDeque<T> {
         items[firstIndex] = null;
         firstIndex += 1;
         size -= 1;
+        if (size < items.length / 4 && items.length > 8) {
+            resize(items.length / 8, items.length / 2);
+        }
+        if (size == 0) {
+            firstIndex = items.length / 2;
+        }
         return item;
     }
 
@@ -70,6 +79,12 @@ public class ArrayDeque<T> {
         T item = items[firstIndex + size - 1];
         items[firstIndex + size - 1] = null;
         size -= 1;
+        if (size < items.length / 4 && items.length > 8) {
+            resize(items.length / 8, items.length / 2);
+        }
+        if (size == 0) {
+            firstIndex = items.length / 2;
+        }
         return item;
     }
 
