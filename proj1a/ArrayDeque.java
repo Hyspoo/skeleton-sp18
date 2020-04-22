@@ -63,7 +63,7 @@ public class ArrayDeque<T> {
         size -= 1;
         if (size < items.length / 4 && items.length > 8) {
             resize(items.length / 8, items.length / 2);
-            firstIndex = items.length / 4
+            firstIndex = items.length / 4;
         }
         if (size == 0) {
             firstIndex = items.length / 2;
@@ -80,7 +80,7 @@ public class ArrayDeque<T> {
         size -= 1;
         if (size < items.length / 4 && items.length > 8) {
             resize(items.length / 8, items.length / 2);
-            firstIndex = items.length / 4
+            firstIndex = items.length / 4;
         }
         if (size == 0) {
             firstIndex = items.length / 2;
