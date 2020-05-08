@@ -5,12 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 public class TestOffByN {
 
-    static CharacterComparator offByN = new OffByN(5);
+    static CharacterComparator offBy5 = new OffByN(5);
 
     @Test
     public void testEqualChars() {
-        assertFalse(offByN.equalChars('a', 'a'));
-        assertFalse(offByN.equalChars('a', 'b'));
-        assertTrue(offByN.equalChars('a', 'f'));
+        assertFalse(offBy5.equalChars('a', 'a'));
+        assertFalse(offBy5.equalChars('a', 'b'));
+        assertTrue(offBy5.equalChars('a', 'f'));
     }
 }
