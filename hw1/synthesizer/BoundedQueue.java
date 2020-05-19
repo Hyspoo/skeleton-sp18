@@ -9,9 +9,9 @@ public interface BoundedQueue<T> extends Iterable<T> {
     T peek();
 
     default boolean isEmpty() {
-        return false;
+        return fillCount() == 0;
     }
     default boolean isFull() {
-        return false;
+        return fillCount() == capacity();
     }
 }
