@@ -32,9 +32,8 @@ public class HexWorld {
 
     private static TETile randomTile(TETile[][] tiles, Point p, int size) {
         ArrayList<TETile> types = new ArrayList<>();
-        TETile temp;
         for (Point i : getNeighbourPoints(p, size)) {
-            temp = getBiome(tiles, i, size);
+            TETile temp = getBiome(tiles, i, size);
             if (temp != Tileset.NOTHING) {
                 types.add(temp);
             }
