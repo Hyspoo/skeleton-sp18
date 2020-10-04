@@ -11,6 +11,9 @@ public class Percolation {
 
     public Percolation(int N) {
         // create N-by-N grid, with all sites initially blocked
+        if (N <= 0) {
+            throw new IllegalArgumentException("index " + N + " < 0");
+        }
         len = N;
         grid = new boolean[N][N];
         numberOfOpenSites = 0;
