@@ -20,7 +20,7 @@ public class Percolation {
         }
     }
 
-    int To1D(int row, int col) {
+    private int to1D(int row, int col) {
         return row * len + col;
     }
 
@@ -31,16 +31,16 @@ public class Percolation {
             grid[row][col] = true;
 
             if (row > 0 && isOpen(row - 1, col)) {
-                uf.union(To1D(row - 1, col), To1D(row, col));
+                uf.union(to1D(row - 1, col), to1D(row, col));
             }
             if (col > 0 && isOpen(row, col - 1)) {
-                uf.union(To1D(row, col - 1), To1D(row, col));
+                uf.union(to1D(row, col - 1), to1D(row, col));
             }
             if (row < len - 1 && isOpen(row + 1, col)) {
-                uf.union(To1D(row + 1, col), To1D(row, col));
+                uf.union(to1D(row + 1, col), to1D(row, col));
             }
             if (col < len - 1 && isOpen(row, col + 1)) {
-                uf.union(To1D(row, col + 1), To1D(row, col));
+                uf.union(to1D(row, col + 1), to1D(row, col));
             }
 
             numberOfOpenSites += 1;
@@ -54,7 +54,7 @@ public class Percolation {
     }
     public boolean isFull(int row, int col) {
         // is the site (row, col) full?
-        return (isOpen(row, col) && uf.connected(len * len, To1D(row, col)));
+        return (isOpen(row, col) && uf.connected(len * len, to1D(row, col)));
     }
     public int numberOfOpenSites() {
         // number of open sites
