@@ -72,6 +72,9 @@ public class Percolation {
     }
     public boolean percolates() {
         // does the system percolate?
+        if (len == 1) {
+            return isOpen(0, 0);
+        }
         return uf2.connected(len * len, len * len + 1);
     }
     public static void main(String[] args) {
