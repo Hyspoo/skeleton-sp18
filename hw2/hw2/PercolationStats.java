@@ -10,6 +10,12 @@ public class PercolationStats {
 
     public PercolationStats(int N, int T, PercolationFactory pf) {
         // perform T independent experiments on an N-by-N grid
+        if (N <= 0) {
+            throw new IllegalArgumentException("index of N: " + N + " <= 0");
+        }
+        if (T <= 0) {
+            throw new IllegalArgumentException("index of T: " + T + " <= 0");
+        }
         times = T;
         result = new double[T];
 

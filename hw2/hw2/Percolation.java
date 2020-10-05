@@ -7,19 +7,22 @@ public class Percolation {
     private boolean[][] grid;
     private int len;
     private int numberOfOpenSites;
-    private WeightedQuickUnionUF uf;
+    private WeightedQuickUnionUF uf, uf2;
 
     public Percolation(int N) {
         // create N-by-N grid, with all sites initially blocked
         if (N <= 0) {
-            throw new IllegalArgumentException("index " + N + " < 0");
+            throw new IllegalArgumentException("index " + N + " <= 0");
         }
         len = N;
         grid = new boolean[N][N];
         numberOfOpenSites = 0;
         uf = new WeightedQuickUnionUF(N * N + 1);
+        uf2 = new WeightedQuickUnionUF(N * N + 2);
         for (int i = 0; i < N; i += 1) {
             uf.union(N * N, i);
+            uf2.union(N * N, i);
+            uf2.union(N * N - 1 - i, N * N + 1);
         }
     }
 
@@ -35,15 +38,19 @@ public class Percolation {
 
             if (row > 0 && isOpen(row - 1, col)) {
                 uf.union(to1D(row - 1, col), to1D(row, col));
+                uf2.union(to1D(row - 1, col), to1D(row, col));
             }
             if (col > 0 && isOpen(row, col - 1)) {
                 uf.union(to1D(row, col - 1), to1D(row, col));
+                uf2.union(to1D(row, col - 1), to1D(row, col));
             }
             if (row < len - 1 && isOpen(row + 1, col)) {
                 uf.union(to1D(row + 1, col), to1D(row, col));
+                uf2.union(to1D(row + 1, col), to1D(row, col));
             }
             if (col < len - 1 && isOpen(row, col + 1)) {
                 uf.union(to1D(row, col + 1), to1D(row, col));
+                uf2.union(to1D(row, col + 1), to1D(row, col));
             }
 
             numberOfOpenSites += 1;
@@ -65,12 +72,7 @@ public class Percolation {
     }
     public boolean percolates() {
         // does the system percolate?
-        for (int i = 0; i < len; i += 1) {
-            if (isFull(len - 1, i)) {
-                return true;
-            }
-        }
-        return false;
+        return uf2.connected(len * len, len * len + 1);
     }
     public static void main(String[] args) {
         // use for unit testing (not required)
