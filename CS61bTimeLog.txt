@@ -11,3 +11,18 @@ CS61B Time log
 #10.5 BST
 
 50min video
+
+
+#10.7 Balanced BST
+
+5min review
+15min preview
+30min video
+
+
+#10.8 Balanced BST
+1h video
+20min exercise
+20min curious about LLRB implementation
+
+
