@@ -26,3 +26,5 @@ CS61B Time log
 20min curious about LLRB implementation
 
 
+#10.20
+1h Lab 9
