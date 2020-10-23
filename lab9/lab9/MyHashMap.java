@@ -65,6 +65,9 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         if (key == null) {
             return;
         }
+        if (!buckets[hash(key)].containsKey(key)) {
+            this.size += 1;
+        }
         buckets[hash(key)].put(key, value);
     }
 
